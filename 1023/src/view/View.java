@@ -9,8 +9,12 @@ import javax.swing.JFrame;
 
 public class View extends JFrame{
    static  ArrayList<cell> celllist = new ArrayList<cell>();
+   static  ArrayList<cell> cell1list;
    public static Panel1 j1;
    public static int ji1=0;
+   static cell cel3;
+   static int MU=1;//我方普通单位增加
+   static int EU=2;//敌方单位每回合增加
 	public View(ArrayList<cell> cl1) {
 		
 		
@@ -31,14 +35,18 @@ public class View extends JFrame{
 					
 
 					 ji1=0;
+					 
+					 
+					 
+					 
 			    	  for (int i=0;i<25;i++){
-			    		
-			    		 
+
 			    		  cell cel=j1.celllist.get(i);
 			    		  if(cel.getstate()!=0){
 			    			  ji1++;
 			    		  }
 					    	if(cel.getstate()!=0){//我方单位向上移动
+					    		
 					    		if(cel.getpositionj()!=0){
 					    			
 							    	cell cel2=j1.celllist.get(i-1);//后来的		
@@ -57,8 +65,12 @@ public class View extends JFrame{
 							    	cel2.setnum(cel2.getnum()*-1);
 							    	}	
 							    	}
+					            	if(cel.getstate()==2){
+						    			cel.setstate(1);
+						    			cel2.setstate(2);
+						    		}
 									}
-
+			
 					    	}
 			    	  }
 			    	
@@ -68,9 +80,9 @@ public class View extends JFrame{
 				    	
 				    	cell cel=j1.celllist.get(i);
 				    	if(cel.getstate()==0){
-				    	cel.setnum(cel.getnum()+5);
-				    	}
-				    	cel.setnum(cel.getnum()+1);
+				    	cel.setnum(cel.getnum()+EU);
+				    	}else{cel.setnum(cel.getnum()+MU);}
+				    	
 				    	
 				    int r1=(int) (Math.random()*4)+1;
 				    run1(r1,j1.celllist,cel,i);
@@ -92,7 +104,7 @@ public class View extends JFrame{
 			    		  if(cel.getstate()!=0){
 			    			  ji1++;
 			    		  }
-					    	if(cel.getstate()!=0){//我方单位向上移动
+					    	if(cel.getstate()!=0){//我方单位向左移动
 					    		if(cel.getposition()>4){
 					    			
 							    	cell cel2=j1.celllist.get(i-5);//后来的		
@@ -111,6 +123,10 @@ public class View extends JFrame{
 							    	cel2.setnum(cel2.getnum()*-1);
 							    	}	
 							    	}
+					                if(cel.getstate()==2){
+						    			cel.setstate(1);
+						    			cel2.setstate(2);
+						    		}
 									}
 
 					    	}
@@ -120,10 +136,9 @@ public class View extends JFrame{
 				    for (int i=0;i<25;i++){
 				    	cell cel=j1.celllist.get(i);
 				     	if(cel.getstate()==0){
-					    	cel.setnum(cel.getnum()+3);
-					    	}
-				    	
-				    	cel.setnum(cel.getnum()+1);
+					    	cel.setnum(cel.getnum()+EU);
+					    	}else{
+				    	cel.setnum(cel.getnum()+MU);}
 				    int r1=(int) (Math.random()*4)+1;
 				    run1(r1,j1.celllist,cel,i);
 				    	j1.re(); 	
@@ -133,111 +148,214 @@ public class View extends JFrame{
 				    
 				    }}
 				break; 
+				
+				
+				
+				
 				case 's':{ 
-					ji1=0;
-			    	  for (int i=0;i<25;i++){
-			    		  cell cel=j1.celllist.get(i);
-			    		  if(cel.getstate()!=0){
-			    			  ji1++;
-			    		  }
-			    		 	if(cel.getstate()==0){
-						    	cel.setnum(cel.getnum()+2);
-						    	}
-			    		  
-					    	if(cel.getstate()!=0){//我方单位向下移动
-					    		if(cel.getpositionj()!=4){
-					    			
-							    	cell cel2=j1.celllist.get(i+1);//后来的		
-							    	int b1=cel.getnum()/2;
-						    	cel.setnum(cel.getnum()-b1);
-					                if(cel2.getstate()!=0){
-//					                	System.out.println(cel2.getnum()+b1+"asdhaskjdhasjkhfdllllllllllll");
-							    	cel2.setnum(cel2.getnum()+b1);
-//							    	cel2.setnum(1000);
-							    	}else{
-							    		System.out.println("132131231f"+(cel2.getnum()-b1));
-							    	cel2.setnum(cel2.getnum()-b1);
-							    	
-							    	if(cel2.getnum()<0){
-							    	cel2.setstate(1);
-							    	cel2.setnum(cel2.getnum()*-1);
-							    	}	
-							    	}
-									}
+					
+//					  ji1=0;
+//			    	  for (int i=0;i<25;i++){
+//			    		  cell cel=j1.celllist.get(i);
+//			    		  
+//			    		  if(cel.getstate()!=0){
+//			    			  ji1++;
+//			    		  }
+//			    		 	if(cel.getstate()==0){
+//						    	cel.setnum(cel.getnum()+2);
+//						    	}
+//			    		  
+//					    	if(cel.getstate()!=0){//我方单位向下移动
+//					    		if(cel.getpositionj()!=4){
+//					    			
+//							    	cell cel2=j1.celllist.get(i+1);//后来的		
+//							    	int b1=cel.getnum()/2;
+//						    	cel.setnum(cel.getnum()-b1);
+//					                if(cel2.getstate()!=0){
+////					                	System.out.println(cel2.getnum()+b1+"asdhaskjdhasjkhfdllllllllllll");
+//							    	cel2.setnum(cel2.getnum()+b1);
+////							    	cel2.setnum(1000);
+//							    	}else{
+//							    		System.out.println("132131231f"+(cel2.getnum()-b1));
+//							    	cel2.setnum(cel2.getnum()-b1);
+//							    	
+//							    	if(cel2.getnum()<0){
+//							    	cel2.setstate(1);
+//							    	cel2.setnum(cel2.getnum()*-1);
+//							    	}	
+//							    	}
+//									}
+//
+//					    	}
+//			    	  }
+					
 
-					    	}
-			    	  }
+					
+				    keyinit();
+				    for(int i=0;i<cell1list.size();i++){
+				    cell cel=cell1list.get(i);
+				    int p=cel.getposition();
+		    		if(cel.getpositionj()!=4){
+			    	cell cel2=j1.celllist.get(p+1);//后来的		
+			    	int b1=cel.getnum()/2;
+		    	cel.setnum(cel.getnum()-b1);
+	                if(cel2.getstate()!=0){
+			    	cel2.setnum(cel2.getnum()+b1);
+			    	}else{
+			    		System.out.println("132131231f"+(cel2.getnum()-b1));
+			    	cel2.setnum(cel2.getnum()-b1);
+			    	if(cel2.getnum()<0){
+			    	cel2.setstate(1);
+			    	cel2.setnum(cel2.getnum()*-1);
+			    	}	
+			    	}
+	     
+					}	
+				    if (cel.getposition()==cel3.getposition()&&cel.getstate()==2&&j1.celllist.get(p+1).getstate()==1){
+				    	cel.setstate(1);
+				    	j1.celllist.get(p+1).setstate(2);
+				    }	
+				    	
+				    }
+					
+					
+					
+					
 					
 					
 					
 				    for (int i=0;i<25;i++){
 				    	cell cel=j1.celllist.get(i);
 				    	
-				     	if(cel.getstate()==0){
-					    	cel.setnum(cel.getnum()+1);
-					    	}
-				    	
-				    	cel.setnum(cel.getnum()+1);
+				    	if(cel.getstate()==0){
+					    	cel.setnum(cel.getnum()+EU);
+					    	}else{
+				    	cel.setnum(cel.getnum()+MU);}
 				    int r1=(int) (Math.random()*4)+1;
 				    run1(r1,j1.celllist,cel,i);
 				    	j1.re(); 	
 				    	if(cel.getstate()==2){
-				    		cel.setnum(cel.getnum()+10*ji1);
+				    		cel.setnum(cel.getnum()+2*ji1);
 				    	}
 				    
 				    }}
 				break; 
 				case 'd':{ 
 					
-					ji1=0;
-			    	  for (int i=0;i<25;i++){
-			    		  cell cel=j1.celllist.get(i);
-			    		  if(cel.getstate()!=0){
-			    			  ji1++;
-			    		  }
-					    	if(cel.getstate()!=0){//我方单位向下移动
-					    		if(cel.getposition()<20){
-					    			
-							    	cell cel2=j1.celllist.get(i+5);//后来的		
-							    	int b1=cel.getnum()/2;
-						    	cel.setnum(cel.getnum()-b1);
-					                if(cel2.getstate()!=0){
-//					                	System.out.println(cel2.getnum()+b1+"asdhaskjdhasjkhfdllllllllllll");
-							    	cel2.setnum(cel2.getnum()+b1);
-//							    	cel2.setnum(1000);
-							    	}else{
-							    		System.out.println("132131231f"+(cel2.getnum()-b1));
-							    	cel2.setnum(cel2.getnum()-b1);
-							    	
-							    	if(cel2.getnum()<0){
-							    	cel2.setstate(1);
-							    	cel2.setnum(cel2.getnum()*-1);
-							    	}	
-							    	}
-									}
-
+//					ji1=0;
+//			    	  for (int i=0;i<25;i++){
+//			    		  cell cel=j1.celllist.get(i);
+//			    		  if(cel.getstate()!=0){
+//			    			  ji1++;
+//			    		  }
+//					    	if(cel.getstate()!=0){//我方单位向下移动
+//					    		if(cel.getposition()<20){
+//					    			
+//							    	cell cel2=j1.celllist.get(i+5);//后来的		
+//							    	int b1=cel.getnum()/2;
+//						    	cel.setnum(cel.getnum()-b1);
+//					                if(cel2.getstate()!=0){
+////					                	System.out.println(cel2.getnum()+b1+"asdhaskjdhasjkhfdllllllllllll");
+//							    	cel2.setnum(cel2.getnum()+b1);
+////							    	cel2.setnum(1000);
+//							    	}else{
+//							    		System.out.println("132131231f"+(cel2.getnum()-b1));
+//							    	cel2.setnum(cel2.getnum()-b1);
+//							    	
+//							    	if(cel2.getnum()<0){
+//							    	cel2.setstate(1);
+//							    	cel2.setnum(cel2.getnum()*-1);
+//							    	}	
+//							    	}
+//									}
+//
+//					    	}
+//			    	  }
+					
+			     	keyinit();
+			     	
+			     
+					for (int i=0;i<cell1list.size();i++){
+						cell cel=cell1list.get(i);
+						int p=cel.getposition();
+						
+				    	if(cel.getstate()!=0){//我方单位向下移动
+			    		if(cel.getposition()<20){
+			    	    cell cel2=j1.celllist.get(p+5);//后来的	
+					    		
+					    	int b1=cel.getnum()/2;
+				    	cel.setnum(cel.getnum()-b1);
+			                if(cel2.getstate()!=0){
+//			                	System.out.println(cel2.getnum()+b1+"asdhaskjdhasjkhfdllllllllllll");
+					    	cel2.setnum(cel2.getnum()+b1);
+//					    	cel2.setnum(1000);
+					    	}else{
+					    		System.out.println("132131231f"+(cel2.getnum()-b1));
+					    	cel2.setnum(cel2.getnum()-b1);
+					    	
+					    	if(cel2.getnum()<0){
+					    	cel2.setstate(1);
+					    	cel2.setnum(cel2.getnum()*-1);
+					    	}	
 					    	}
-			    	  }
+
+							}
+			    	}
+				    if (cel.getposition()==cel3.getposition()&&cel.getstate()==2&&j1.celllist.get(p+5).getstate()==1){
+				    	cel.setstate(1);
+				    	j1.celllist.get(p+5).setstate(2);
+				    }
+				    	
+				    	
+						
+					}
+					
+					
+					
 					
 					
 				    for (int i=0;i<25;i++){
 				    	cell cel=j1.celllist.get(i);
 				    	
-				     	if(cel.getstate()==1){
-					    	cel.setnum(cel.getnum()+1);
-					    	}
-				    	cel.setnum(cel.getnum()+1);
+				    	if(cel.getstate()==0){
+					    	cel.setnum(cel.getnum()+EU);
+					    	}else{
+				    	cel.setnum(cel.getnum()+MU);}
 				    int r1=(int) (Math.random()*4)+1;
 				    run1(r1,j1.celllist,cel,i);
 				    	j1.re(); 	
 				    	if(cel.getstate()==2){
-				    		cel.setnum(cel.getnum()+ji1);
+				    		cel.setnum(cel.getnum()+2*ji1);
 				    	}
+				    	
+				    	
 				    }
+				    
+				    
 				}
+				
 				
 				}
 				
+			}
+
+			/*
+			 * 按键前的初始化
+			 * */
+			
+			private void keyinit() {
+				ji1=0;
+				cell1list=  new ArrayList<cell>();//初始化
+			    for (int i=0;i<25;i++){
+			    	cell cel=j1.celllist.get(i);
+			    if(cel.getstate()!=0){
+			    	ji1++;
+			    	cell1list.add(cel);
+			    	if(cel.getstate()==2){
+			    		cel3=cel;
+			    	}
+			    }	
+			    }		
 			}
 
 			private void run1(int r1, ArrayList<cell> celllist, cell cel, int i) {

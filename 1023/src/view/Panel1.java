@@ -58,7 +58,7 @@ public class Panel1 extends JPanel{
 	    	
 	    	if (i==12){
 	    		cel.setstate(2);
-	    		cel.setnum(100);
+	    		cel.setnum(102);
 	    	}
 	    	jlabellist.add(j1);
 
